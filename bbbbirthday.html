@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calypso's Birthday</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+        <style>
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                overflow: hidden;
+                font-family: "Oswald", serif;
+                font-optical-sizing: auto;
+                font-weight: 400;
+                font-style: normal;
+            }
+
+            p{
+                font-family: "Oswald", serif;
+                font-weight: 400;   
+                color: white;
+                font-size: 20px;             
+            }
+
+            #milkyway {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to bottom, #000000 0%, #00003a 100%);
+            }
+
+            .star {
+                position: absolute;
+                border-radius: 50%;
+                background-color: white;
+                animation: moveStars linear infinite, blink 0.5ms infinite;
+            }
+
+            @keyframes moveStars {
+                from {
+                    transform: translateX(0%);
+                }
+
+                to {
+                    transform: translateX(200%);
+                    /* Increased translation distance */
+                }
+            }
+
+            @keyframes blink {
+                0% {
+                    opacity: 0;
+                }
+
+                50% {
+                    opacity: 0.9;
+                }
+
+                100% {
+                    opacity: 1;
+                }
+            }
+
+            .spinning-image {
+                animation: spin 2s linear infinite;
+                height: 450px;
+                position: absolute;
+                left: 200px;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+            }
+
+            @keyframes spin {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .cover-vinyl {
+                height: 500px;
+                width: 500px;
+                position: absolute;
+                z-index: 1;
+                left: 0;
+                right: 200px;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+            }
+
+            /* Styles for the slider container */
+            .slider {
+                width: 100%;
+                overflow: hidden;
+                position: relative;
+                z-index: 1;
+            }
+
+            /* Styles for the slider images */
+            .slides {
+                display: flex;
+                transition: transform 1s ease;
+                height: 100vh;
+            }
+
+            /* Styles for individual slide images */
+            .slide {
+                min-width: 100%;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                opacity: 0;
+                transition: opacity 1s ease;
+            }
+
+            /* Navigation buttons */
+            .prev,
+            .next {
+                cursor: pointer;
+                position: absolute;
+                top: 50%;
+                width: auto;
+                margin-top: -22px;
+                padding: 16px;
+                color: white;
+                font-weight: bold;
+                font-size: 18px;
+                transition: 0.6s ease;
+                border-radius: 0 3px 3px 0;
+                user-select: none;
+            }
+
+            .next {
+                right: 0;
+                border-radius: 3px 0 0 3px;
+            }
+
+            /* Hover effect on navigation buttons */
+            .prev:hover,
+            .next:hover {
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+            .player {
+                position: relative;
+            }
+
+            .audio {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(45deg);
+                /* Rotate the audio player */
+            }
+
+            .player .audio-play-button {
+                width: 24px;
+                height: 20px;
+                position: absolute;
+                background: #2f424e;
+                border: 2px solid #5e707d;
+                border-radius: 50%;
+                bottom: 178px;
+                right: 46px;
+                transition: background-color 0.3s;
+            }
+
+            .player .audio-play-button:hover {
+                background-color: #193644;
+                cursor: pointer;
+            }
+
+            .player i {
+                width: 24px;
+                height: 24px;
+                position: absolute;
+                background: #17252d;
+                border-radius: 50%;
+                bottom: 172px;
+                right: 46px;
+            }
+
+            .blink-word {
+                animation: blink 1s infinite alternate;
+                font-weight: 500;
+                color: white;
+                text-align: center;
+                font-size: 55px;
+            }
+
+            .next-yuk{
+                background-color: #193644;
+                color: white;
+                text-align: center;
+                border: none;
+                width: 100%;
+                padding: 10px 0;
+                font-family: 'Oswald';
+                border-radius: 10px;
+                font-weight: 100;
+                margin-top: 20px;
+            }
+
+            .next-yuk:hover{
+                cursor: pointer;
+                background-color: #15262e;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="milkyway"></div>
+        <div class="container">
+            <div class="slider">
+                <div class="slides">
+                    <div class="slide">
+                        <div class="player">
+                            <p class="blink-word">
+                                PLAY ME FIRST
+                              </p>
+                            <img src="./assets/player.webp" alt="">
+                            <div class="audio">
+                                <audio id="audioPlayer">
+                                    <source src="./assets/A Dream Is a Wish Your Heart MakesYoung At Heart (CinderellaSinatra) Rick Hale & Julissa Ruth.mp3" type="audio/mpeg"> Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                            <i></i>
+                            <button class="audio-play-button" onclick="playAudio(); moveSlide(1)"></button>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="player">
+                            <p>Hi, hello!</p>
+                            <p>Before we go to the next part, I want to say HAPPY BIRTHDAY!<br>29 years in this world? Dang! What a champion!</p>
+                            <p>So now you are in your new chapter of your life, I hope nothing sad or bad but only good happens to you.</p>
+                            <p>Thank you for being born and true to yourself!</p>
+                            <p>Udah ya, ini dulu aja. There is more to come!! HAPPY BIRTHDAY BABY!</p>
+                            <button class="next-yuk" onclick="moveSlide(1)">LET'S GO NEXT</button>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="thevinyl">
+                            <img src="./assets/cover.png" alt="" class="cover-vinyl">
+                            <img src="./assets/vinyl.png" alt="Spinning Image" class="spinning-image">
+                        </div>
+                    </div>
+                </div>
+                <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
+                <a class="next" onclick="moveSlide(1)">&#10095;</a>
+            </div>
+        </div>
+        <script>
+            function createStar() {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                const xy = Math.random() * 100;
+                const size = Math.random() * 5 + 1;
+                const color = Math.random() * 100 + 155;
+                const brightness = Math.random() * 30 + 70;
+                const animationDuration = Math.random() * 10 + 5; // Adjusted animation duration
+                star.style.top = xy + '%';
+                star.style.left = Math.random() * 100 + '%'; // Randomize starting position
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.background = `rgba(${color}, ${color}, ${color}, ${brightness / 100})`;
+                star.style.animationDuration = `${animationDuration}s`;
+                document.getElementById('milkyway').appendChild(star);
+            }
+
+            function createStars() {
+                for (let i = 0; i < 200; i++) {
+                    createStar();
+                }
+            }
+            createStars();
+
+            function playAudio() {
+                const audio = document.getElementById('audioPlayer');
+                audio.play();
+            }
+        </script>
+         <script>
+            let slideIndex = 1;
+            showSlides(slideIndex);
+    
+            function moveSlide(n) {
+                // Hide all slides first
+                const slides = document.getElementsByClassName("slide");
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].style.opacity = "0";
+                }
+
+                // Display the next slide after a short delay
+                setTimeout(() => {
+                    showSlides((slideIndex += n));
+                }, 1000); // Adjust the delay time here (in milliseconds)
+            }
+
+    
+            function showSlides(n) {
+                let i;
+                const slides = document.getElementsByClassName("slide");
+                if (n > slides.length) {
+                    slideIndex = 1;
+                }
+                if (n < 1) {
+                    slideIndex = slides.length;
+                }
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none"; // Set opacity to 0 for all slides initially
+                }
+                slides[slideIndex - 1].style.display = "flex";
+                slides[slideIndex - 1].style.opacity = 1; // Show the first slide with full opacity
+            }
+        </script>
+    </body>
+</html>
