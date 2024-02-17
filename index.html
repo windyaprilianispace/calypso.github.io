@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Calypso's Birthday</title>
+        <link rel="icon" type="image/x-icon" href="./assets/cartoon.jpg">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
@@ -54,6 +55,10 @@
                 }
             }
 
+            .container{
+                padding: 0 20px;
+            }
+
             @keyframes blink {
                 0% {
                     opacity: 0;
@@ -99,6 +104,33 @@
                 top: 0;
                 bottom: 0;
                 margin: auto;
+            }
+
+            .thevinyl p{
+                display: none;
+            }
+
+            .thevinyl.mobile p{
+                display: block;
+                position: absolute;
+                top: 20px;
+                color: white;
+                width: 100%;
+                text-align: center;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+
+            .thevinyl.mobile .cover-vinyl {
+                width: 250px;
+                height: 250px;
+                right: 95px;
+            }
+
+            .thevinyl.mobile .spinning-image {
+                height: 230px;
+                left: 100px;
             }
 
             /* Styles for the slider container */
@@ -253,15 +285,26 @@
                     </div>
                     <div class="slide">
                         <div class="thevinyl">
+                            <p>please open it on your laptop <3</p>
                             <img src="./assets/cover.png" alt="" class="cover-vinyl">
                             <img src="./assets/vinyl.png" alt="Spinning Image" class="spinning-image">
                         </div>
                     </div>
                 </div>
-                <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
-                <a class="next" onclick="moveSlide(1)">&#10095;</a>
+                <!-- <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
+                <a class="next" onclick="moveSlide(1)">&#10095;</a> -->
             </div>
         </div>
+        
+        <script>
+            function isMobileDevice() {
+                return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            }
+        
+            if (isMobileDevice()) {
+                document.querySelector('.thevinyl').classList.add('mobile');
+            }
+        </script>
         <script>
             function createStar() {
                 const star = document.createElement('div');
